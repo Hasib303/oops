@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include<queue>
 using namespace std;
 
 class Graph {
@@ -19,15 +20,40 @@ public:
         l[v].push_back(u);
     }
 
-    void printAdjList(){
-        for(int i =0; i<v; i++){
-            cout << i << "-> ";
-            for(int naighbor: l[i]){
-                cout << naighbor << " ";
+    // void printAdjList(){
+    //     for(int i =0; i<v; i++){
+    //         cout << i << "-> ";
+    //         for(int naighbor: l[i]){
+    //             cout << naighbor << " ";
+    //         }
+    //         cout << endl;
+    //     }
+    // }
+    
+    void bfs(){
+        queue<int> Q;
+        vector<bool> vis(v, false);
+
+        Q.push(0);
+        vis[0] = true;
+
+        while(Q.size()>0){
+            int u = Q.front();
+
+            Q.pop();
+
+            cout << u << " ";
+
+            for(int v : l[u]){ //immediate neighbour ->
+                if(!vis[v]){
+                    vis[v] = true;
+                    Q.push(v);
+                }
             }
-            cout << endl;
         }
+        cout << endl;
     }
+
 
 
 };
@@ -41,6 +67,7 @@ int main(){
     g.addEdge(2,3);
     g.addEdge(2,4);
 
-    g.printAdjList();
+    // g.printAdjList();
+    g.bfs();
     return 0;
 }
