@@ -54,6 +54,23 @@ public:
         cout << endl;
     }
 
+    void dfsHelper(int u, vector<bool> &vis){
+        cout << u << " ";
+        vis[u] = true;
+
+        for(int v: l[u]){
+            if(!vis[v]){
+                dfsHelper(v, vis);
+            }
+        }
+    }
+
+    void dfs(){
+        int src = 0;
+        vector<bool> vis(v, false);
+
+        dfsHelper(src, vis);
+    }
 
 
 };
@@ -68,6 +85,7 @@ int main(){
     g.addEdge(2,4);
 
     // g.printAdjList();
-    g.bfs();
+    // g.bfs();
+    g.dfs();
     return 0;
 }
